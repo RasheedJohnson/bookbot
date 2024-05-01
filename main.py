@@ -34,8 +34,10 @@ def char_count(file_text):
         percentage = round((len(count) / (len(chars_match)+len(symbols))) * 100)
         if percentage > new_percentage:
           new_percentage = percentage
-          print(f"{percentage}%", end="\r")
-    print("100%", end="\r")
+          progress_bar = percentage * "#"
+          
+          print(f"[{progress_bar}] | {percentage}%", end="\r")
+    print(f"{progress_bar} | 100%")
     print(count)
     # return count
 
