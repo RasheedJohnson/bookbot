@@ -1,14 +1,20 @@
 import sys
 
 def main():
-    # path_to_file = "books/frankenstein.txt"
-    path_to_file = "books/text.txt"
+    path_to_file = "books/frankenstein.txt"
+    # path_to_file = "books/text.txt"
     file_contents = get_text(path_to_file)
     word_list = get_word_count(file_contents)
     word_count = len(word_list)
     
-    char_count(file_contents)
+    count = char_count(file_contents)
 
+    report = f"--- Begin report of {path_to_file} ---\n{word_count} words found in document\n"
+    for i in count:
+        num = count[i]
+        message = f"The '{i}' char occurs {count[i]} times"
+        print(message)
+    print("--- End report ---")
 
 def get_text(path):
     with open(path) as f:
@@ -20,17 +26,16 @@ def get_word_count(text):
 
 def char_count(file_text):
     # counts char appearance in words for each char in received
-    chars_match = "abcdefghijklmnopqrstuvwxyz0123456789"
+    chars_match = "abcdefghijklmnopqrstuvwxyz"
     symbols = ["'", '"', "\\n", ",", ".", " "]
     count = {}
     new_percentage = 0
-    for i in file_text:
-        i = i.lower()
-        i_count = 0
+    for i in chars_match:
+        char_occurance = 0
         for j in file_text:
-          if j.lower() == i:
-            i_count += 1
-        count[i] = i_count
+            if j.lower() == i:
+                char_occurrence += 1
+            count[i] = char_occurrence
         percentage = round((len(count) / (len(chars_match)+len(symbols))) * 100)
         if percentage > new_percentage:
           new_percentage = percentage
@@ -38,8 +43,7 @@ def char_count(file_text):
           
           print(f"[{progress_bar}] | {percentage}%", end="\r")
     print(f"{progress_bar} | 100%")
-    print(count)
-    # return count
+    return count
 
 
 if __name__ == "__main__":
