@@ -25,7 +25,9 @@ def get_word_count(text):
     return words
 
 def char_count(file_text):
+    # counts char appearance in words for each char in received
     chars_match = "abcdefghijklmnopqrstuvwxyz"
+    symbols = ["'", '"', "\\n", ",", ".", " "]
     count = {}
     new_percentage = 0
     for i in chars_match:
@@ -34,7 +36,7 @@ def char_count(file_text):
             if j.lower() == i:
                 char_occurrence += 1
             count[i] = char_occurrence
-        percentage = round((len(count) / len(chars_match)) * 100)
+        percentage = round((len(count) / (len(chars_match)+len(symbols))) * 100)
         if percentage > new_percentage:
           new_percentage = percentage
           progress_bar = percentage * "#"
